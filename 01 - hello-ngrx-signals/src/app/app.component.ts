@@ -8,7 +8,7 @@ import { patchState, signalState } from '@ngrx/signals';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   readonly person = signalState<Person>({
@@ -18,21 +18,21 @@ export class AppComponent {
       street: '123 Main St',
       city: 'Anytown',
       state: 'CA',
-    }
+    },
   });
 
-  // readonly personStreet = computed(() => 
+  // readonly personStreet = computed(() =>
   //   this.person().address.street
   // )
 
   readonly personStreet = this.person.address.street;
 
   method() {
-    patchState(this.person, p => ({
+    patchState(this.person, (p) => ({
       address: {
-        ...p.address, 
-        street: '456 Elm St'
-      }
+        ...p.address,
+        street: '456 Elm St',
+      },
     }));
   }
 }

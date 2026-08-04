@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { Person } from './models/person.model';
+import { patchState, signalState } from '@ngrx/signals';
 
 const person: Person = {
   id: 1,
@@ -20,6 +21,12 @@ const person: Person = {
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  readonly person = signal<Person>(person);
-  readonly personStreet = computed(() => this.person().address.street);
+  readonly person = signalState<Person>(person);
+  readonly personStreet = this.person.address.street;
+
+  method() {
+    patchState(this.person, (p) => ({
+      address: { ...p.address, street: '456 Elm St' },
+    }));
+  }
 }

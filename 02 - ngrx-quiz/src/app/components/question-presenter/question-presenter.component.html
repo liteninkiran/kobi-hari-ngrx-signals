@@ -1,7 +1,7 @@
 @let q = question();
 <h1>
   Question: What do you get when you add
-  @for (color of q.caption; track color) {
+  @for (colour of q.caption; track colour) {
     @if ($index > 0) {
       @if ($last) {
         and
@@ -10,8 +10,8 @@
       }
     }
 
-    {{ color | colorName }}
-    <span class="color-item" [style.background]="color"></span>
+    {{ colour | colourName }}
+    <span class="colour-item" [style.background]="colour"></span>
   }
   ?
 </h1>
@@ -19,7 +19,7 @@
   @for (answer of q.answers; track answer) {
     <div class="answer">
       <div class="thumbnail" [style.background]="answer"></div>
-      <div class="caption">{{ answer | colorName }}</div>
+      <div class="caption">{{ answer | colourName }}</div>
     </div>
   }
 </div>

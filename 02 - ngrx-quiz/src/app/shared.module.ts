@@ -8,7 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { RouterModule } from '@angular/router';
-import { ColorNamePipe } from './pipes/color-name.pipe';
+import { ColourNamePipe } from './pipes/colour-name.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const sharable: Type<any>[] = [
@@ -21,7 +21,7 @@ const sharable: Type<any>[] = [
   CommonModule,
   RouterModule,
   ReactiveFormsModule,
-  ColorNamePipe,
+  ColourNamePipe,
   MatProgressSpinnerModule,
 ];
 

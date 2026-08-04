@@ -1,7 +1,9 @@
-import { Address } from "./address.model";
+import { Address } from './address.model';
 
-export interface Person {
-    readonly id: number;
-    readonly name: string;
-    readonly address: Address;
-}
+type _Person = {
+  id: number;
+  name: string;
+  address: Address;
+};
+
+export type Person = Readonly<_Person>;

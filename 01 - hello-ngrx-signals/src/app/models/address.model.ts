@@ -1,5 +1,7 @@
-export interface Address {
-    readonly street: string;
-    readonly city: string;
-    readonly state: string;
-}
+type _Address = {
+  street: string;
+  city: string;
+  state: string;
+};
+
+export type Address = Readonly<_Address>;

@@ -1,6 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 import { QuizStore } from '../../store/quiz.store';
+import { patchState } from '@ngrx/signals';
 
 @Component({
   selector: 'app-question-presenter',
@@ -11,4 +12,11 @@ import { QuizStore } from '../../store/quiz.store';
 export class QuestionPresenterComponent {
   readonly store = inject(QuizStore);
   readonly question = this.store.currentQuestion;
+
+  onSelect(index: number) {
+    console.log('Selected answer:', index);
+    patchState(this.store, (state) => ({
+      answers: [...state.answers, index],
+    }));
+  }
 }

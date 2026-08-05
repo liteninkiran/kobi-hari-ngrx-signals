@@ -3,7 +3,10 @@ import { initialQuizSlice } from './quiz.slice';
 import { computed } from '@angular/core';
 
 export const QuizStore = signalStore(
-  { providedIn: 'root' },
+  {
+    providedIn: 'root',
+    protectedState: false,
+  },
   withState(initialQuizSlice),
   withComputed((store) => {
     const currentQuestionIndex = computed(() => store.answers().length);

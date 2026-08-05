@@ -4,11 +4,7 @@ import { Question } from '../models/question.model';
 import { HTML_COLOURS, KNOWN_COLOURS } from '../data/colours';
 import namer from 'color-namer';
 
-export function randomNumber(
-  min: number,
-  max: number,
-  includeMax = false,
-): number {
+export function randomNumber(min: number, max: number, includeMax = false): number {
   const range = includeMax ? max - min + 1 : max - min;
   return Math.floor(Math.random() * range) + min;
 }
@@ -44,8 +40,7 @@ export function addRgb(...rgbs: RGB[]): RGB {
 export function randomColourQuestion() {
   const twoOrThree = randomNumber(2, 3, true);
   const colours = randomItems([...KNOWN_COLOURS], twoOrThree) as
-    | [KEYWORD, KEYWORD]
-    | [KEYWORD, KEYWORD, KEYWORD];
+    [KEYWORD, KEYWORD] | [KEYWORD, KEYWORD, KEYWORD];
   const rgbs = colours.map((clr) => keyword.rgb(clr));
   const added = addRgb(...rgbs);
   const addedHex = rgb.hex(added);
@@ -79,9 +74,7 @@ function splitCamelCase(str: string) {
 const COLOUR_DISPLAY_NAMES = getColourDisplayNameMap();
 
 export function getColourDisplayNameMap() {
-  return Object.fromEntries(
-    HTML_COLOURS.map((clr) => [clr.toLowerCase(), splitCamelCase(clr)]),
-  );
+  return Object.fromEntries(HTML_COLOURS.map((clr) => [clr.toLowerCase(), splitCamelCase(clr)]));
 }
 
 export function displayNameOfColour(colour: string) {

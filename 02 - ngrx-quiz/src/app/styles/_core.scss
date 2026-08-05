@@ -1,4 +1,4 @@
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
 
 @mixin go() {
   @include mat.elevation-classes();
@@ -19,7 +19,7 @@
   * {
     margin: 0;
     padding: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
     box-sizing: border-box;
   }
 

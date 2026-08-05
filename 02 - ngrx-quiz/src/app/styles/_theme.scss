@@ -1,6 +1,6 @@
-@use "@angular/material" as mat;
-@use "sass:map";
-@use "vars";
+@use '@angular/material' as mat;
+@use 'sass:map';
+@use 'vars';
 
 @mixin go($primary, $accent, $is-light: true) {
   $theme: _create_theme_map($primary, $accent, $is-light);
@@ -75,15 +75,15 @@
     A700: 700,
   );
 
-  @include vars.go("p", $primary, $keys);
-  @include vars.go("pc", $primary-contrast, $keys);
+  @include vars.go('p', $primary, $keys);
+  @include vars.go('pc', $primary-contrast, $keys);
 
-  @include vars.go("a", $accent, $accent-keys);
-  @include vars.go("ac", $accent-contrast, $accent-keys);
+  @include vars.go('a', $accent, $accent-keys);
+  @include vars.go('ac', $accent-contrast, $accent-keys);
 
-  @include vars.go("w", $warn, $keys);
-  @include vars.go("wc", $warn-contrast, $keys);
+  @include vars.go('w', $warn, $keys);
+  @include vars.go('wc', $warn-contrast, $keys);
 
-  @include vars.go("b", $background);
-  @include vars.go("f", $foreground);
+  @include vars.go('b', $background);
+  @include vars.go('f', $foreground);
 }

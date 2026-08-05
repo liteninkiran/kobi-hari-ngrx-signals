@@ -1,8 +1,8 @@
-@use "core";
-@use "palettes" as pal;
-@use "theme";
-@use "typography";
-@use "@angular/material" as mat;
+@use 'core';
+@use 'palettes' as pal;
+@use 'theme';
+@use 'typography';
+@use '@angular/material' as mat;
 
 @include core.go();
 @include theme.go(pal.$primary, pal.$accent, true);

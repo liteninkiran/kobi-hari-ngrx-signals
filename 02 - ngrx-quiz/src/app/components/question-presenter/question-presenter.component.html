@@ -17,7 +17,7 @@
 </h1>
 <div class="answers">
   @for (answer of q.answers; track answer) {
-    <div class="answer" (click)="onSelect($index)">
+    <div class="answer" (click)="store.addAnswer($index)">
       <div class="thumbnail" [style.background]="answer"></div>
       <div class="caption">{{ answer | colourName }}</div>
     </div>

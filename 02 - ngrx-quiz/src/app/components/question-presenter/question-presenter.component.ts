@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
-import { Question } from '../../models/question.model';
+import { Component, inject, signal } from '@angular/core';
 import { SharedModule } from '../../shared.module';
-import { FormControl, Validators } from '@angular/forms';
+import { QuizStore } from '../../store/quiz.store';
 
 @Component({
   selector: 'app-question-presenter',
@@ -10,9 +9,6 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrl: './question-presenter.component.scss',
 })
 export class QuestionPresenterComponent {
-  readonly question = signal<Question>({
-    caption: ['Red', 'Green'],
-    answers: ['Red', 'Green', 'Blue', 'Yellow'],
-    correctIndex: 3,
-  });
+  readonly store = inject(QuizStore);
+  readonly question = this.store.currentQuestion;
 }

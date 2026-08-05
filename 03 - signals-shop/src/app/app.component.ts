@@ -11,5 +11,5 @@ import { CartComponent } from './components/cart/cart.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  readonly isCartShowing = signal<boolean>(true);
+  readonly isCartShowing = signal<boolean>(false);
 }

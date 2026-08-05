@@ -1,2 +1,5 @@
 <app-toolbar caption="Colors Quiz" icon="palette" />
+<div class="main">
+  <app-progress [value]="store.currentQuestionIndex()" [max]="store.questionCount()" />
+</div>
 <app-question-presenter />

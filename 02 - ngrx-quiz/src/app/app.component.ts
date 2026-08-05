@@ -4,10 +4,17 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { QuestionPresenterComponent } from './components/question-presenter/question-presenter.component';
 import { ProgressComponent } from './components/progress/progress.component';
 import { QuizStore } from './store/quiz.store';
+import { DoneComponent } from './components/done/done.component';
 
 @Component({
   selector: 'app-root',
-  imports: [SharedModule, ToolbarComponent, QuestionPresenterComponent, ProgressComponent],
+  imports: [
+    SharedModule,
+    ToolbarComponent,
+    QuestionPresenterComponent,
+    ProgressComponent,
+    DoneComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

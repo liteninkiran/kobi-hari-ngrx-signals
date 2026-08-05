@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 import { QuizStore } from '../../store/quiz.store';
-import { patchState } from '@ngrx/signals';
 
 @Component({
   selector: 'app-question-presenter',
@@ -15,8 +14,6 @@ export class QuestionPresenterComponent {
 
   onSelect(index: number) {
     console.log('Selected answer:', index);
-    patchState(this.store, (state) => ({
-      answers: [...state.answers, index],
-    }));
+    this.store.addAnswer(index);
   }
 }

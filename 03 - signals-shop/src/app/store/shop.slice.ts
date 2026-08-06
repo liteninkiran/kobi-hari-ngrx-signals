@@ -13,11 +13,8 @@ export type PersistedShopSlice = Pick<ShopSlice, 'cartQuantities'>;
 
 export const initialShopSlice: ShopSlice = {
   products: ALL_PRODUCTS,
-  searchWord: 'signal',
-  cartQuantities: {
-    'signal-booster': 3,
-    'reactive-refresher': 2,
-  },
+  searchWord: '',
+  cartQuantities: {},
   cartVisible: false,
   taxRate: 0.08,
 };

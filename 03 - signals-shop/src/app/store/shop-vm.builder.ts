@@ -16,15 +16,9 @@ type CartProps = {
   cartVisible: boolean;
 };
 
-export function buildProductListVm({
-  products,
-  searchWord,
-  quantities,
-}: ProductProps): ProductListVm {
+export function buildProductListVm({ products, searchWord, quantities }: ProductProps): ProductListVm {
   function buildProductItems(): ProductItemVm[] {
     const word = searchWord.trim().toLowerCase();
-    if (!word) return [];
-
     const filterFn = (product: Product) => product.name.toLowerCase().includes(word);
     const mapFn = (product: Product) => ({
       ...product,

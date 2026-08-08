@@ -1,5 +1,5 @@
 import { Component, computed, inject, Input, signal } from '@angular/core';
-import { SharedModule } from '../../shared.module';
+import { SharedModule } from '../../../../shared.module';
 import { QuizStore } from '../../store/quiz.store';
 
 @Component({
@@ -10,8 +10,8 @@ import { QuizStore } from '../../store/quiz.store';
 })
 export class DoneComponent {
   readonly store = inject(QuizStore);
-
   readonly correct = this.store.correctCount;
-  readonly total = this.store.questionCount;
+  readonly total = this.store.questionsCount;
+
   readonly score = computed(() => this.correct() / this.total());
 }

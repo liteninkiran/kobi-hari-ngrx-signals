@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, Input, signal } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 
 @Component({
@@ -9,6 +9,7 @@ import { SharedModule } from '../../shared.module';
 })
 export class ProgressComponent {
   readonly value = input.required<number>();
+
   readonly max = input.required<number>();
 
   readonly ratio = computed(() => this.value() / this.max());

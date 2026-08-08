@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { SharedModule } from '../../shared.module';
+import { SharedModule } from '../../../../shared.module';
 import { QuizStore } from '../../store/quiz.store';
 
 @Component({
@@ -10,5 +10,4 @@ import { QuizStore } from '../../store/quiz.store';
 })
 export class QuestionPresenterComponent {
   readonly store = inject(QuizStore);
-  readonly question = this.store.currentQuestion;
 }

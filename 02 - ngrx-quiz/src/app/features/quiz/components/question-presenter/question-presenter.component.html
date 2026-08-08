@@ -1,7 +1,7 @@
-@let q = question();
+@let question = store.currentQuestion();
 <h1>
-  Question: What do you get when you add
-  @for (colour of q.caption; track $index) {
+  What do you get when you Add
+  @for (colour of question.caption; track $index) {
     @if ($index > 0) {
       @if ($last) {
         and
@@ -16,7 +16,7 @@
   ?
 </h1>
 <div class="answers">
-  @for (answer of q.answers; track $index) {
+  @for (answer of question.answers; track $index) {
     <div class="answer" (click)="store.addAnswer($index)">
       <div class="thumbnail" [style.background]="answer"></div>
       <div class="caption">{{ answer | colourName }}</div>

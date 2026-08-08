@@ -1,5 +1,5 @@
-import { QUESTIONS } from '../data/questions';
-import { Question } from '../models/question.model';
+import { QUESTIONS } from '../../../data/questions';
+import { Question } from '../../../models/question.model';
 
 export interface QuizSlice {
   readonly questions: Question[];
@@ -9,5 +9,4 @@ export interface QuizSlice {
 export const initialQuizSlice: QuizSlice = {
   questions: QUESTIONS,
   answers: [],
-  // answers: [0, 0, 0, 0, 0, 0, 0],
 };

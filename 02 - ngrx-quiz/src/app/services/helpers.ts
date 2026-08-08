@@ -1,8 +1,7 @@
 import { keyword, rgb } from 'color-convert';
 import { KEYWORD, RGB } from 'color-convert/conversions';
-import { Question } from '../models/question.model';
-import { HTML_COLOURS, KNOWN_COLOURS } from '../data/colours';
 import namer from 'color-namer';
+import { Question } from '../models/question.model';
 
 export function randomNumber(min: number, max: number, includeMax = false): number {
   const range = includeMax ? max - min + 1 : max - min;
@@ -26,6 +25,23 @@ export function randomItems<T>(items: T[], count: number): T[] {
   return res;
 }
 
+const KNOWN_COLOURS: KEYWORD[] = [
+  'red',
+  'blue',
+  'green',
+  'yellow',
+  'orange',
+  'purple',
+  'magenta',
+  'cyan',
+  'gray',
+  'brown',
+  'teal',
+  'gold',
+  'lime',
+  'tomato',
+];
+
 export function addRgb(...rgbs: RGB[]): RGB {
   const res: RGB = [0, 0, 0];
 
@@ -40,7 +56,8 @@ export function addRgb(...rgbs: RGB[]): RGB {
 export function randomColourQuestion() {
   const twoOrThree = randomNumber(2, 3, true);
   const colours = randomItems([...KNOWN_COLOURS], twoOrThree) as
-    [KEYWORD, KEYWORD] | [KEYWORD, KEYWORD, KEYWORD];
+    | [KEYWORD, KEYWORD]
+    | [KEYWORD, KEYWORD, KEYWORD];
   const rgbs = colours.map((clr) => keyword.rgb(clr));
   const added = addRgb(...rgbs);
   const addedHex = rgb.hex(added);
@@ -74,7 +91,159 @@ function splitCamelCase(str: string) {
 const COLOUR_DISPLAY_NAMES = getColourDisplayNameMap();
 
 export function getColourDisplayNameMap() {
-  return Object.fromEntries(HTML_COLOURS.map((clr) => [clr.toLowerCase(), splitCamelCase(clr)]));
+  const htmlColours = [
+    'AliceBlue',
+    'AntiqueWhite',
+    'Aqua',
+    'Aquamarine',
+    'Azure',
+    'Beige',
+    'Bisque',
+    'Black',
+    'BlanchedAlmond',
+    'Blue',
+    'BlueViolet',
+    'Brown',
+    'BurlyWood',
+    'CadetBlue',
+    'Chartreuse',
+    'Chocolate',
+    'Coral',
+    'CornflowerBlue',
+    'Cornsilk',
+    'Crimson',
+    'Cyan',
+    'DarkBlue',
+    'DarkCyan',
+    'DarkGoldenRod',
+    'DarkGray',
+    'DarkGrey',
+    'DarkGreen',
+    'DarkKhaki',
+    'DarkMagenta',
+    'DarkOliveGreen',
+    'Darkorange',
+    'DarkOrchid',
+    'DarkRed',
+    'DarkSalmon',
+    'DarkSeaGreen',
+    'DarkSlateBlue',
+    'DarkSlateGray',
+    'DarkSlateGrey',
+    'DarkTurquoise',
+    'DarkViolet',
+    'DeepPink',
+    'DeepSkyBlue',
+    'DimGray',
+    'DimGrey',
+    'DodgerBlue',
+    'FireBrick',
+    'FloralWhite',
+    'ForestGreen',
+    'Fuchsia',
+    'Gainsboro',
+    'GhostWhite',
+    'Gold',
+    'GoldenRod',
+    'Gray',
+    'Grey',
+    'Green',
+    'GreenYellow',
+    'HoneyDew',
+    'HotPink',
+    'IndianRed',
+    'Indigo',
+    'Ivory',
+    'Khaki',
+    'Lavender',
+    'LavenderBlush',
+    'LawnGreen',
+    'LemonChiffon',
+    'LightBlue',
+    'LightCoral',
+    'LightCyan',
+    'LightGoldenRodYellow',
+    'LightGray',
+    'LightGrey',
+    'LightGreen',
+    'LightPink',
+    'LightSalmon',
+    'LightSeaGreen',
+    'LightSkyBlue',
+    'LightSlateGray',
+    'LightSlateGrey',
+    'LightSteelBlue',
+    'LightYellow',
+    'Lime',
+    'LimeGreen',
+    'Linen',
+    'Magenta',
+    'Maroon',
+    'MediumAquaMarine',
+    'MediumBlue',
+    'MediumOrchid',
+    'MediumPurple',
+    'MediumSeaGreen',
+    'MediumSlateBlue',
+    'MediumSpringGreen',
+    'MediumTurquoise',
+    'MediumVioletRed',
+    'MidnightBlue',
+    'MintCream',
+    'MistyRose',
+    'Moccasin',
+    'NavajoWhite',
+    'Navy',
+    'OldLace',
+    'Olive',
+    'OliveDrab',
+    'Orange',
+    'OrangeRed',
+    'Orchid',
+    'PaleGoldenRod',
+    'PaleGreen',
+    'PaleTurquoise',
+    'PaleVioletRed',
+    'PapayaWhip',
+    'PeachPuff',
+    'Peru',
+    'Pink',
+    'Plum',
+    'PowderBlue',
+    'Purple',
+    'RebeccaPurple',
+    'Red',
+    'RosyBrown',
+    'RoyalBlue',
+    'SaddleBrown',
+    'Salmon',
+    'SandyBrown',
+    'SeaGreen',
+    'SeaShell',
+    'Sienna',
+    'Silver',
+    'SkyBlue',
+    'SlateBlue',
+    'SlateGray',
+    'SlateGrey',
+    'Snow',
+    'SpringGreen',
+    'SteelBlue',
+    'Tan',
+    'Teal',
+    'Thistle',
+    'Tomato',
+    'Turquoise',
+    'Violet',
+    'Wheat',
+    'White',
+    'WhiteSmoke',
+    'Yellow',
+    'YellowGreen',
+    'Question: What do you get when you add',
+  ];
+
+  return Object.fromEntries(htmlColours.map((clr) => [clr.toLowerCase(), splitCamelCase(clr)]));
 }
 
 export function displayNameOfColour(colour: string) {

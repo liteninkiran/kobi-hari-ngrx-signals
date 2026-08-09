@@ -305,7 +305,7 @@ export const SPANISH_DICTIONARY: Dictionary = {
   QuestionCaption: 'Pregunta: ¿Qué obtienes cuando agregas?',
 };
 
-export const DICTIONARIES: Record<string, Dictionary> = {
+export const DICTIONARIES: Dictionaries = {
   en: ENGLISH_DICTIONARY,
   sp: SPANISH_DICTIONARY,
 };

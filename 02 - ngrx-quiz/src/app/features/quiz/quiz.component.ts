@@ -19,6 +19,7 @@ import { QuizStore } from './store/quiz.store';
   ],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.scss',
+  providers: [QuizStore],
 })
 export default class QuizPageComponent {
   readonly store = inject(QuizStore);

@@ -3,9 +3,13 @@ import { Product } from '../models/product.model';
 
 export interface ShopSlice {
   readonly products: Product[];
+
   readonly searchWord: string;
+
   readonly cartQuantities: Record<string, number>;
+
   readonly cartVisible: boolean;
+
   readonly taxRate: number;
 }
 

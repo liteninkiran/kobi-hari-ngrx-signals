@@ -11,16 +11,38 @@
     margin-bottom: 5px;
   }
 
-  app-items-list {
+  app-product-list {
     flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0px;
     overflow-y: auto;
   }
 
-  app-cart {
+  .cart {
     position: absolute;
-    top: 0;
+    inset-block-start: 0;
     inset-inline-start: 0;
     width: 100%;
     height: 100%;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 55px 5px;
+
+    .overlay {
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    app-cart {
+    }
   }
 }

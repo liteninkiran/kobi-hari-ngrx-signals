@@ -1,13 +1,11 @@
 import { PartialStateUpdater } from '@ngrx/signals';
 import { ShopSlice } from './shop.slice';
 
-type ShopUpdater = PartialStateUpdater<ShopSlice>;
-
-export function setSearchWord(searchWord: string): ShopUpdater {
-  return () => ({ searchWord });
+export function setSearchWord(searchWord: string): PartialStateUpdater<ShopSlice> {
+  return (_) => ({ searchWord });
 }
 
-export function addToCart(productId: string): ShopUpdater {
+export function addToCart(productId: string): PartialStateUpdater<ShopSlice> {
   return (state) => {
     const cartQuantities = { ...state.cartQuantities };
     cartQuantities[productId] = cartQuantities[productId] + 1 || 1;
@@ -15,19 +13,19 @@ export function addToCart(productId: string): ShopUpdater {
   };
 }
 
-export function viewCart(): ShopUpdater {
-  return () => ({ cartVisible: true });
+export function viewCart(): PartialStateUpdater<ShopSlice> {
+  return (_) => ({ cartVisible: true });
 }
 
-export function hideCart(): ShopUpdater {
-  return () => ({ cartVisible: false });
+export function hideCart(): PartialStateUpdater<ShopSlice> {
+  return (_) => ({ cartVisible: false });
 }
 
-export function incrementQuantity(productId: string): ShopUpdater {
+export function incrementQuantity(productId: string): PartialStateUpdater<ShopSlice> {
   return addToCart(productId);
 }
 
-export function decrementQuantity(productId: string): ShopUpdater {
+export function decrementQuantity(productId: string): PartialStateUpdater<ShopSlice> {
   return (state) => {
     const cartQuantities = { ...state.cartQuantities };
     const newQuantity = cartQuantities[productId] - 1;
@@ -41,8 +39,8 @@ export function decrementQuantity(productId: string): ShopUpdater {
   };
 }
 
-export function checkoutCart(): ShopUpdater {
-  return () => ({
+export function checkoutCart(): PartialStateUpdater<ShopSlice> {
+  return (_) => ({
     cartQuantities: {},
     cartVisible: false,
   });

@@ -3,7 +3,7 @@
 <h1>{{ vm.productItems.length }} Results</h1>
 <div class="results">
   @for (product of vm.productItems; track product.id) {
-    <app-item-card [product]="product" />
+    <app-product-card [product]="product" />
     @if (!$last) {
       <div class="divider"></div>
     }

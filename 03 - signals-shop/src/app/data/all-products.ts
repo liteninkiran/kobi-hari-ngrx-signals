@@ -108,8 +108,7 @@ export const ALL_PRODUCTS: Product[] = [
   {
     id: 'state-stabilizer',
     name: 'State Stabilizer',
-    description:
-      "Balance your app's state changes for smoother user experiences and enhanced performance.",
+    description: "Balance your app's state changes for smoother user experiences and enhanced performance.",
     unitPrice: 37.99,
     ranking: 5,
   },
@@ -140,24 +139,21 @@ export const ALL_PRODUCTS: Product[] = [
   {
     id: 'observer-optimizer',
     name: 'Observer Optimizer',
-    description:
-      'Enhance observer efficiency to handle state changes swiftly and improve app performance.',
+    description: 'Enhance observer efficiency to handle state changes swiftly and improve app performance.',
     unitPrice: 44.99,
     ranking: 4,
   },
   {
     id: 'observable-hub',
     name: 'Observable Hub',
-    description:
-      'Centralize and coordinate asynchronous data streams with ease for streamlined data flow.',
+    description: 'Centralize and coordinate asynchronous data streams with ease for streamlined data flow.',
     unitPrice: 54.99,
     ranking: 5,
   },
   {
     id: 'signal-linker',
     name: 'Signal Linker',
-    description:
-      'Seamlessly connect signals and observables for a unified, cohesive state management solution.',
+    description: 'Seamlessly connect signals and observables for a unified, cohesive state management solution.',
     unitPrice: 39.99,
     ranking: 4,
   },

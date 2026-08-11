@@ -1,7 +1,8 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { CartItemVm } from '../../view-model/cart-item.vm';
+import { QuantityComponent } from '../quantity/quantity.component';
 import { SharedModule } from '../../../../shared.module';
-import { QuantityComponent } from '../../../quantity/quantity.component';
+import { CartStore } from '../../store/cart.store';
 import { ShopStore } from '../../../../store/shop.store';
 
 @Component({

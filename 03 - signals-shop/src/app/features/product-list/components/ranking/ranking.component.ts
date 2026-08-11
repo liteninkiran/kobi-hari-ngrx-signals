@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { SharedModule } from '../../shared.module';
+import { SharedModule } from '../../../../shared.module';
 
 @Component({
   selector: 'app-ranking',

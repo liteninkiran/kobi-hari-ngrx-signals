@@ -3,26 +3,13 @@ import { initialShopSlice, PersistedShopSlice } from './shop.slice';
 import { computed, effect, Signal } from '@angular/core';
 import { buildCartVm, buildProductListVm } from './shop-vm.builder';
 import * as updaters from './shop.updaters';
-
 export const ShopStore = signalStore(
   { providedIn: 'root' },
   withState(initialShopSlice),
   withComputed((store) => ({
-    productListVm: computed(() =>
-      buildProductListVm({
-        products: store.products(),
-        searchWord: store.searchWord(),
-        quantities: store.cartQuantities(),
-      }),
-    ),
-    cartVm: computed(() =>
-      buildCartVm({
-        cartVisible: store.cartVisible(),
-        products: store.products(),
-        quantities: store.cartQuantities(),
-        taxRate: store.taxRate(),
-      }),
-    ),
+    productListVm: computed(() => buildProductListVm(store.products(), store.searchWord(), store.cartQuantities())),
+
+    cartVm: computed(() => buildCartVm(store.products(), store.cartQuantities(), store.taxRate(), store.cartVisible())),
   })),
   withMethods((store) => ({
     setSearchWord: (searchWord: string) => patchState(store, updaters.setSearchWord(searchWord)),
@@ -35,18 +22,19 @@ export const ShopStore = signalStore(
   })),
   withHooks((store) => ({
     onInit() {
+      const persisted: Signal<PersistedShopSlice> = computed(() => ({
+        cartQuantities: store.cartQuantities(),
+      }));
+
       const persistedText = localStorage.getItem('shop');
       if (persistedText) {
         const persistedData = JSON.parse(persistedText) as PersistedShopSlice;
         patchState(store, persistedData);
       }
 
-      const persisted = computed(() => ({
-        cartQuantities: store.cartQuantities(),
-      }));
-
       effect(() => {
-        localStorage.setItem('shop', JSON.stringify(persisted()));
+        const persistedValue = persisted();
+        localStorage.setItem('shop', JSON.stringify(persistedValue));
       });
     },
   })),

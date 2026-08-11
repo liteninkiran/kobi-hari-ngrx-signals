@@ -1,6 +1,7 @@
 import { CartItemVm } from '../features/cart/view-model/cart-item.vm';
 import { Product } from '../models/product.model';
-import { CartVm, ProductListVm } from './shop.vm';
+import { CartVm } from '../features/cart/view-model/cart.vm';
+import { ProductListVm } from '../features/product-list/view-model/product-list.vm';
 
 export function buildProductListVm(
   products: Product[],

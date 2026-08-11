@@ -9,7 +9,6 @@ import { SharedModule } from '../../../../shared.module';
 })
 export class QuantityComponent {
   readonly amount = input.required();
-
   readonly increment = output();
   readonly decrement = output();
 }

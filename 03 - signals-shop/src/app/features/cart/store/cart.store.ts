@@ -8,7 +8,7 @@ export const CartStore = signalStore(
   withState(initialCartSlice),
   withProps((_) => ({ _shopStore: inject(ShopStore) })),
   withComputed((store) => ({
-    cartVm: computed(() =>
+    vm: computed(() =>
       buildCartVm(
         store._shopStore.products(),
         store._shopStore.cartQuantities(),

@@ -8,7 +8,7 @@ export const ProductListStore = signalStore(
   withState(initialProductListSlice),
   withProps((_) => ({ _shopStore: inject(ShopStore) })),
   withComputed((store) => ({
-    productListVm: computed(() =>
+    vm: computed(() =>
       buildProductListVm(store._shopStore.products(), store._shopStore.searchWord(), store._shopStore.cartQuantities()),
     ),
   })),

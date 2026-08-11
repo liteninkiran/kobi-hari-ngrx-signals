@@ -1,4 +1,5 @@
 import { ALL_PRODUCTS } from '../data/all-products';
+import { CartQuantities } from '../models/cart-quantities.model';
 import { Product } from '../models/product.model';
 
 export interface ShopSlice {
@@ -6,7 +7,7 @@ export interface ShopSlice {
 
   readonly searchWord: string;
 
-  readonly cartQuantities: Record<string, number>;
+  readonly cartQuantities: CartQuantities;
 
   readonly cartVisible: boolean;
 

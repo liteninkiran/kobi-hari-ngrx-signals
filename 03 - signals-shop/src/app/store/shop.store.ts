@@ -1,8 +1,10 @@
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
 import { initialShopSlice, PersistedShopSlice } from './shop.slice';
 import { computed, effect, Signal } from '@angular/core';
-import { buildCartVm, buildProductListVm } from './shop-vm.builder';
+import { buildCartVm } from '../features/cart/store/cart.vm-builder';
+import { buildProductListVm } from '../features/product-list/store/product-list.vm-builder';
 import * as updaters from './shop.updaters';
+
 export const ShopStore = signalStore(
   { providedIn: 'root' },
   withState(initialShopSlice),

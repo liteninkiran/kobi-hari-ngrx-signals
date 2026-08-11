@@ -1,5 +1,6 @@
 import { PartialStateUpdater } from '@ngrx/signals';
 import { AppSlice } from './app.slice';
+import { Dictionary } from '../data/dictionaries';
 
 type AppSliceUpdater = PartialStateUpdater<AppSlice>;
 
@@ -17,4 +18,12 @@ export function resetLanguages(languages: string[]): AppSliceUpdater {
     possibleLanguages: languages,
     selectedLanguage: languages[0],
   });
+}
+
+export function setBusy(isBusy: boolean): AppSliceUpdater {
+  return (_) => ({ isBusy });
+}
+
+export function setDictionary(dictionary: Dictionary): AppSliceUpdater {
+  return (_) => ({ selectedDictionary: dictionary });
 }

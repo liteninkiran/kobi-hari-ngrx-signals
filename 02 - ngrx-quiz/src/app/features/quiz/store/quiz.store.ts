@@ -8,18 +8,16 @@ import {
   withState,
 } from '@ngrx/signals';
 import { initialQuizSlice, QuizSlice } from './quiz.slice';
-import { computed, effect, inject, Signal } from '@angular/core';
+import { computed, effect, inject } from '@angular/core';
 import { addAnswer, resetQuiz } from './quiz.updaters';
 import { getCorrectCount } from './quiz.helpers';
 import { QUESTION_CAPTION } from '../../../data/dictionaries';
-import { translate, translateToPairs, Translation } from '../../../store/app.helpers';
+import { translate, translateToPairs } from '../../../store/app.helpers';
 import { AppStore } from '../../../store/app.store';
-import { Question } from '../../../models/question.model';
 
 export const QuizStore = signalStore(
   withState(initialQuizSlice),
   withComputed((store) => {
-    console.log('With Computed Feature Parameter is executed');
     const appStore = inject(AppStore);
     const dictionary = appStore.selectedDictionary;
 
@@ -51,7 +49,6 @@ export const QuizStore = signalStore(
   })),
   withHooks((store) => ({
     onInit: () => {
-      console.log('QuizStore initialized');
       const stateJson = localStorage.getItem('quiz');
       if (stateJson) {
         const state = JSON.parse(stateJson) as QuizSlice;
@@ -63,9 +60,6 @@ export const QuizStore = signalStore(
         const stateJson = JSON.stringify(state);
         localStorage.setItem('quiz', stateJson);
       });
-    },
-    onDestroy: () => {
-      console.log('QuizStore destroyed');
     },
   })),
 );

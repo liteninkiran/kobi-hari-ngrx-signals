@@ -9,14 +9,15 @@ export function getDictionary(language: string, dictionaries: Dictionaries): Dic
   return dictionaries[language] ?? Object.values(dictionaries)[0];
 }
 
-export function translate(key: string, dictionary: Dictionary): string {
+export function translate(key: string, dictionary: Dictionary | null): string {
+  if (!dictionary) return key;
   return dictionary[key] ?? key;
 }
 
-export function translateToPair(key: string, dictionary: Dictionary): Translation {
+export function translateToPair(key: string, dictionary: Dictionary | null): Translation {
   return { key, name: translate(key, dictionary) };
 }
 
-export function translateToPairs(keys: string[], dictionary: Dictionary): Translation[] {
+export function translateToPairs(keys: string[], dictionary: Dictionary | null): Translation[] {
   return keys.map((key) => translateToPair(key, dictionary));
 }

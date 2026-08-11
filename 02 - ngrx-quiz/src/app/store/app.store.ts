@@ -4,6 +4,7 @@ import {
   withComputed,
   withHooks,
   withMethods,
+  withProps,
   withState,
 } from '@ngrx/signals';
 import { initialAppSlice } from './app.slice';
@@ -15,20 +16,20 @@ import { getDictionary } from './app.helpers';
 export const AppStore = signalStore(
   { providedIn: 'root' },
   withState(initialAppSlice),
-  withComputed((store) => {
-    const dictionaries = inject(DICTIONARIES_TOKEN);
-    return {
-      selectedDictionary: computed(() => getDictionary(store.selectedLanguage(), dictionaries)),
-    };
+  withProps((_) => {
+    const _dictionaries = inject(DICTIONARIES_TOKEN);
+    const _languages = Object.keys(_dictionaries);
+    return { _dictionaries, _languages };
   }),
-  withMethods((store) => {
-    const dictionaries = inject(DICTIONARIES_TOKEN);
-    const languages = Object.keys(dictionaries);
-    return {
-      changeLanguage: () => patchState(store, changeLanguage(languages)),
-      _resetLanguages: () => patchState(store, resetLanguages(languages)),
-    };
-  }),
+  withComputed((store) => ({
+    selectedDictionary: computed(() =>
+      getDictionary(store.selectedLanguage(), store._dictionaries),
+    ),
+  })),
+  withMethods((store) => ({
+    changeLanguage: () => patchState(store, changeLanguage(store._languages)),
+    _resetLanguages: () => patchState(store, resetLanguages(store._languages)),
+  })),
   withHooks((store) => ({
     onInit: () => {
       store._resetLanguages();

@@ -6,8 +6,8 @@ import { CartVm } from '../view-model/cart.vm';
 export function buildCartVm(
   products: Product[],
   quantities: CartQuantities,
-  taxRate: number,
   cartVisible: boolean,
+  taxRate: number,
 ): CartVm {
   const items = buildCartItems();
   const subtotal = items.reduce((sum, item) => sum + item.total, 0);

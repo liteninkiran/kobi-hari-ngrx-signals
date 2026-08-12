@@ -15,14 +15,6 @@ export class DictionariesService {
 
   getDictionaryWithDelay(language: string): Observable<Dictionary> {
     const delay = Math.floor(Math.random() * 3000) + 1000;
-    return of(this.dictionaryOf(language)).pipe(
-      // tap((_) =>
-      //   console.log(
-      //     `Started loading for ${language.toUpperCase()} with ${(delay / 1000).toFixed(1)}s delay`,
-      //   ),
-      // ),
-      delayWhen(() => timer(delay)),
-      // tap((_) => console.log('Finished')),
-    );
+    return of(this.dictionaryOf(language)).pipe(delayWhen(() => timer(delay)));
   }
 }

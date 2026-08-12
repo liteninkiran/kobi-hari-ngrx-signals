@@ -8,9 +8,10 @@ import {
 } from '@ngrx/signals';
 import { initialAppSlice } from './app.slice';
 import { inject } from '@angular/core';
-import { changeLanguage, resetLanguages, setBusy, setDictionary } from './app.updaters';
+import { changeLanguage, resetLanguages, setBusy } from './app.updaters';
 import { DictionariesService } from '../services/dictionaries.service';
-import { firstValueFrom } from 'rxjs';
+import { delay, tap } from 'rxjs';
+import { rxMethod } from '@ngrx/signals/rxjs-interop';
 
 export const AppStore = signalStore(
   { providedIn: 'root' },
@@ -21,23 +22,28 @@ export const AppStore = signalStore(
     return { _dictionariesService, _languages };
   }),
   withMethods((store) => {
-    const invalidateDictionary = async () => {
-      patchState(store, setBusy(true));
-      const dictionary$ = store._dictionariesService.getDictionaryWithDelay(
-        store.selectedLanguage(),
-      );
-      const dictionary = await firstValueFrom(dictionary$);
-      patchState(store, setBusy(false), setDictionary(dictionary));
-    };
+    const invalidateDictionary = rxMethod<string>((input$) =>
+      input$.pipe(
+        tap((lang) => {
+          console.log('Invalidate dictionary', lang);
+          patchState(store, setBusy(true));
+        }),
+        delay(1000),
+        tap((lang) => {
+          console.log('Invalidate dictionary', lang, '- COMPLETED');
+          patchState(store, setBusy(false));
+        }),
+      ),
+    );
 
     return {
-      changeLanguage: async () => {
+      changeLanguage: () => {
         patchState(store, changeLanguage(store._languages));
-        await invalidateDictionary();
+        invalidateDictionary(store.selectedLanguage);
       },
-      _resetLanguages: async () => {
+      _resetLanguages: () => {
         patchState(store, resetLanguages(store._languages));
-        await invalidateDictionary();
+        invalidateDictionary(store.selectedLanguage);
       },
     };
   }),

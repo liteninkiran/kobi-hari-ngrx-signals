@@ -8,9 +8,15 @@ import {
 } from '@ngrx/signals';
 import { initialAppSlice } from './app.slice';
 import { inject } from '@angular/core';
-import { changeLanguage, resetLanguages, setBusy } from './app.updaters';
+import {
+  AppSliceUpdater,
+  changeLanguage,
+  resetLanguages,
+  setBusy,
+  setDictionary,
+} from './app.updaters';
 import { DictionariesService } from '../services/dictionaries.service';
-import { delay, tap } from 'rxjs';
+import { map, mergeAll, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 
 export const AppStore = signalStore(
@@ -24,15 +30,10 @@ export const AppStore = signalStore(
   withMethods((store) => {
     const invalidateDictionary = rxMethod<string>((input$) =>
       input$.pipe(
-        tap((lang) => {
-          console.log('Invalidate dictionary', lang);
-          patchState(store, setBusy(true));
-        }),
-        delay(1000),
-        tap((lang) => {
-          console.log('Invalidate dictionary', lang, '- COMPLETED');
-          patchState(store, setBusy(false));
-        }),
+        tap((_lang) => patchState(store, setBusy(true))),
+        map((lang) => store._dictionariesService.getDictionaryWithDelay(lang)),
+        mergeAll(),
+        tap((dict) => patchState(store, setDictionary(dict), setBusy(false))),
       ),
     );
 

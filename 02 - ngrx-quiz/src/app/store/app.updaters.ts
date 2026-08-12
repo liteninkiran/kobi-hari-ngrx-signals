@@ -2,7 +2,7 @@ import { PartialStateUpdater } from '@ngrx/signals';
 import { AppSlice } from './app.slice';
 import { Dictionary } from '../data/dictionaries';
 
-type AppSliceUpdater = PartialStateUpdater<AppSlice>;
+export type AppSliceUpdater = PartialStateUpdater<AppSlice>;
 
 export function changeLanguage(languages: string[]): AppSliceUpdater {
   return (state) => {

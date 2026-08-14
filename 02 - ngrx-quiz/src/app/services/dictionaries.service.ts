@@ -7,7 +7,7 @@ import { Dictionary } from '../data/dictionaries';
 @Injectable({ providedIn: 'root' })
 export class DictionariesService {
   readonly #dictionaries = inject(DICTIONARIES_TOKEN);
-  readonly #delays = [1000, 5000, 'error'];
+  readonly #delays = [1000, 5000];
   #currentDelayIndex = -1;
 
   readonly languages = Object.keys(this.#dictionaries);

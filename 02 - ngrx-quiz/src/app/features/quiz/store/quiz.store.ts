@@ -1,15 +1,13 @@
 import {
-  getState,
   patchState,
   signalStore,
   withComputed,
-  withHooks,
   withMethods,
   withProps,
   withState,
 } from '@ngrx/signals';
-import { initialQuizSlice, QuizSlice } from './quiz.slice';
-import { computed, effect, inject } from '@angular/core';
+import { initialQuizSlice } from './quiz.slice';
+import { computed, inject } from '@angular/core';
 import { addAnswer, resetQuestions, resetQuiz, setBusy } from './quiz.updaters';
 import { getCorrectCount } from './quiz.helpers';
 import { translate, translateToPairs } from '../../../store/app.helpers';
@@ -18,6 +16,8 @@ import { AppStore } from '../../../store/app.store';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { ColourQuizGeneratorService } from '../../../services/colour-quiz-generator.service';
 import { exhaustAll, map, tap } from 'rxjs';
+import { withDevtools } from '@angular-architects/ngrx-toolkit';
+import { withLocalStorage } from '../../../custom-features/with-local-storage.feature';
 
 export const QuizStore = signalStore(
   withState(initialQuizSlice),
@@ -62,19 +62,6 @@ export const QuizStore = signalStore(
       ),
     ),
   })),
-  withHooks((store) => ({
-    onInit: () => {
-      const stateJson = localStorage.getItem('quiz');
-      if (stateJson) {
-        const state = JSON.parse(stateJson) as QuizSlice;
-        patchState(store, state);
-      }
-
-      effect(() => {
-        const state = getState(store);
-        const stateJson = JSON.stringify(state);
-        localStorage.setItem('quiz', stateJson);
-      });
-    },
-  })),
+  withLocalStorage('quiz-store'),
+  withDevtools('quiz-store'),
 );

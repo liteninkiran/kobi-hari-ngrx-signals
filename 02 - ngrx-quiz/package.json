@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/ngrx-toolkit": "^19.5.0",
     "@angular/animations": "^19.0.3",
     "@angular/common": "^19.0.3",
     "@angular/compiler": "^19.0.3",
@@ -19,8 +20,8 @@
     "@angular/platform-browser": "^19.0.3",
     "@angular/platform-browser-dynamic": "^19.0.3",
     "@angular/router": "^19.0.3",
-    "@ngrx/signals": "^19.0.0",
     "@ngrx/operators": "^19.0.0",
+    "@ngrx/signals": "^19.0.0",
     "color-convert": "^2.0.1",
     "color-namer": "^1.4.0",
     "rxjs": "~7.8.0",

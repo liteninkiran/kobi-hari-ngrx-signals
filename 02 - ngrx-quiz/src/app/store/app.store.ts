@@ -6,14 +6,14 @@ import {
   withProps,
   withState,
 } from '@ngrx/signals';
+import { withDevtools } from '@angular-architects/ngrx-toolkit';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { initialAppSlice } from './app.slice';
 import { inject } from '@angular/core';
 import { tapResponse } from '@ngrx/operators';
 import { changeLanguage, resetLanguages, setBusy, setDictionary } from './app.updaters';
 import { DictionariesService } from '../services/dictionaries.service';
-import { map, switchMap, tap } from 'rxjs';
-import { ColourQuizGeneratorService } from '../services/colour-quiz-generator.service';
+import { switchMap, tap } from 'rxjs';
 import { NotificationsService } from '../services/notifications.service';
 
 export const AppStore = signalStore(
@@ -26,7 +26,6 @@ export const AppStore = signalStore(
     return {
       _dictionariesService,
       _languages,
-      _quizGeneratorService: inject(ColourQuizGeneratorService),
       _notifications: inject(NotificationsService),
     };
   }),
@@ -49,18 +48,8 @@ export const AppStore = signalStore(
     _invalidateDictionary(store.selectedLanguage);
 
     return {
-      changeLanguage: () => {
-        patchState(store, changeLanguage(store._languages));
-      },
-      _resetLanguages: () => {
-        patchState(store, resetLanguages(store._languages));
-      },
-      generateQuiz: rxMethod<void>((trigger$) =>
-        trigger$.pipe(
-          tap((_) => patchState(store, setBusy(true))),
-          map((_) => store._quizGeneratorService.createRandomQuizSync()),
-        ),
-      ),
+      changeLanguage: () => patchState(store, changeLanguage(store._languages)),
+      _resetLanguages: () => patchState(store, resetLanguages(store._languages)),
     };
   }),
   withHooks((store) => ({
@@ -68,4 +57,5 @@ export const AppStore = signalStore(
       store._resetLanguages();
     },
   })),
+  withDevtools('app-store'),
 );

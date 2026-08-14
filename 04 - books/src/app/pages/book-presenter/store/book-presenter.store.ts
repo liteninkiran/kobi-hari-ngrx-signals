@@ -2,6 +2,7 @@ import {
   patchState,
   signalMethod,
   signalStore,
+  type,
   withComputed,
   withHooks,
   withMethods,
@@ -11,14 +12,24 @@ import { initialBookPresenterSlice } from './book-presenter.slice';
 import { computed } from '@angular/core';
 import { BOOKS_COLLECTION } from '../../../data/books-collection';
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
-import { setAllEntities, withEntities } from '@ngrx/signals/entities';
+import {
+  entityConfig,
+  setAllEntities,
+  withEntities,
+} from '@ngrx/signals/entities';
 import { Book } from '../../../models/book.model';
+
+const bookConfig = entityConfig({
+  entity: type<Book>(),
+  collection: '_books',
+  selectId: (book) => book.id,
+});
 
 export const BookPresenterStore = signalStore(
   withState(initialBookPresenterSlice),
-  withEntities<Book>(),
+  withEntities(bookConfig),
   withComputed((store) => ({
-    book: computed(() => store.entityMap()[store.id()]),
+    book: computed(() => store._booksEntityMap()[store.id()]),
   })),
   withMethods((store) => ({
     setBookId: signalMethod<number>((id) => patchState(store, { id })),
@@ -26,7 +37,7 @@ export const BookPresenterStore = signalStore(
   withDevtools('book-presenter'),
   withHooks((store) => ({
     onInit: () => {
-      patchState(store, setAllEntities(BOOKS_COLLECTION));
+      patchState(store, setAllEntities(BOOKS_COLLECTION, bookConfig));
     },
   })),
 );

@@ -15,6 +15,7 @@ import { withDevtools } from '@angular-architects/ngrx-toolkit';
 import {
   entityConfig,
   setAllEntities,
+  updateEntity,
   withEntities,
 } from '@ngrx/signals/entities';
 import { Book } from '../../../models/book.model';
@@ -33,6 +34,18 @@ export const BookPresenterStore = signalStore(
   })),
   withMethods((store) => ({
     setBookId: signalMethod<number>((id) => patchState(store, { id })),
+    renameCurrentBook: (name: string) => {
+      patchState(
+        store,
+        updateEntity(
+          {
+            id: store.id(),
+            changes: { title: name },
+          },
+          bookConfig,
+        ),
+      );
+    },
   })),
   withDevtools('book-presenter'),
   withHooks((store) => ({

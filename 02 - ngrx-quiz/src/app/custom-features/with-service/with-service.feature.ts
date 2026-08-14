@@ -6,8 +6,9 @@ import {
   patchState,
   type,
   SignalStoreFeature,
+  SignalStoreFeatureResult,
 } from '@ngrx/signals';
-import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { RxMethod, rxMethod } from '@ngrx/signals/rxjs-interop';
 import { exhaustMap, Observable, tap } from 'rxjs';
 import { setBusy, setIdle } from '../with-busy/with-busy.updaters';
 import { BusySlice } from '../with-busy/with-busy.slice';
@@ -15,17 +16,17 @@ import { tapResponse } from '@ngrx/operators';
 
 type Update<S extends object> = Partial<Prettify<S>> | PartialStateUpdater<Prettify<S>>;
 
-type Input<S> = {
+type Input<S> = SignalStoreFeatureResult & {
   state: S & BusySlice;
   props: {};
   methods: {};
 };
 
-type Output = {
+type Output = SignalStoreFeatureResult & {
   state: {};
   props: {};
   methods: {
-    _load: () => void;
+    _load: RxMethod<void>;
   };
 };
 
@@ -34,14 +35,14 @@ type Props<T, S extends object> = {
   updater: (data: T) => Update<S>;
 };
 
-type Feature<S> = SignalStoreFeature<Input<S>, Output>;
+export function withService<T, S extends object>({
+  loader,
+  updater,
+}: Props<T, S>): SignalStoreFeature<Input<S>, Output>;
 
-export function withService<T, S extends object>({ loader, updater }: Props<T, S>): Feature<S>;
 export function withService<T, S extends object>({ loader, updater }: Props<T, S>) {
   return signalStoreFeature(
-    {
-      state: type<S & BusySlice>(),
-    },
+    { state: type<S & BusySlice>() },
     withMethods((store) => {
       const source$ = loader();
       return {
@@ -52,7 +53,7 @@ export function withService<T, S extends object>({ loader, updater }: Props<T, S
               source$.pipe(
                 tapResponse({
                   next: (value) => patchState(store, updater(value)),
-                  error: (error) => console.log(error),
+                  error: (error) => console.error(error),
                   finalize: () => patchState(store, setIdle() as any),
                 }),
               ),

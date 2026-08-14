@@ -3,10 +3,12 @@
 @use 'theme';
 @use 'typography';
 @use '@angular/material' as mat;
+@use 'snackbar';
 
 @include core.go();
 @include theme.go(pal.$primary, pal.$accent, true);
 @include typography.typography();
+@include snackbar.go();
 
 .blue-theme {
   @include theme.go(mat.$m2-blue-palette, pal.$accent, true);

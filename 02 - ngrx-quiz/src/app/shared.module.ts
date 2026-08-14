@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { ColourNamePipe } from './pipes/colour-name.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const sharable: Type<any>[] = [
   MatIconModule,
@@ -20,6 +21,7 @@ const sharable: Type<any>[] = [
   MatRippleModule,
   MatRadioModule,
   MatTooltipModule,
+  MatSnackBarModule,
   CommonModule,
   RouterModule,
   ReactiveFormsModule,

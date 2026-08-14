@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Inject, inject, Injectable } from '@angular/core';
 import { DICTIONARIES_TOKEN } from '../tokens/dictionaries.token';
 import { getDictionary } from '../store/app.helpers';
 import { delay, Observable, of, switchMap, tap, throwError } from 'rxjs';
@@ -7,7 +7,7 @@ import { Dictionary } from '../data/dictionaries';
 @Injectable({ providedIn: 'root' })
 export class DictionariesService {
   readonly #dictionaries = inject(DICTIONARIES_TOKEN);
-  readonly #delays = [1000, 1000, 1000, 1000, 'error'];
+  readonly #delays = [1000, 5000, 'error'];
   #currentDelayIndex = -1;
 
   readonly languages = Object.keys(this.#dictionaries);

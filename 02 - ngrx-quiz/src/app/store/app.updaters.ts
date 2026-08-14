@@ -20,10 +20,6 @@ export function resetLanguages(languages: string[]): AppSliceUpdater {
   });
 }
 
-export function setBusy(isBusy: boolean): AppSliceUpdater {
-  return (_) => ({ isBusy });
-}
-
 export function setDictionary(dictionary: Dictionary): AppSliceUpdater {
   return (_) => ({ selectedDictionary: dictionary });
 }
